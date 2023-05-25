@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.DbBorrowDao">
+
+    <resultMap type="com.example.entity.DbBorrow" id="DbBorrowMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="bid" column="bid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--通过uid查询-->
+    <select id="queryById" resultType="com.example.entity.DbBorrow">
+        select
+          id, uid, bid
+        from db_borrow
+        where uid = #{uid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DbBorrowMap">
+        select
+          id, uid, bid
+        from db_borrow
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="bid != null">
+                and bid = #{bid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from db_borrow
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="bid != null">
+                and bid = #{bid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into db_borrow(uid, bid)
+        values (#{uid}, #{bid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db_borrow(uid, bid)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.uid}, #{entity.bid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db_borrow(uid, bid)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uid}, #{entity.bid})
+        </foreach>
+        on duplicate key update
+        uid = values(uid),
+        bid = values(bid)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_borrow
+        <set>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="bid != null">
+                bid = #{bid},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_borrow where id = #{id}
+    </delete>
+
+</mapper>
+
