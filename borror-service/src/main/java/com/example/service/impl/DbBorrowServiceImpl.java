@@ -27,6 +27,9 @@ public class DbBorrowServiceImpl implements DbBorrowService {
     @Resource
     private DbBorrowDao dbBorrowDao;
 
+    @Resource
+    RestTemplate restTemplate;
+
     @Override
     public borrowDetail getBorrowDetailById(Integer uid) {
         List<DbBorrow> dbBorrowList = dbBorrowDao.queryById(uid);
@@ -34,11 +37,10 @@ public class DbBorrowServiceImpl implements DbBorrowService {
         for(DbBorrow dbBorrow : dbBorrowList){
             bidList.add(dbBorrow.getBid());
         }
-        RestTemplate restTemplate = new RestTemplate();
-        DbUser dbUser = restTemplate.getForObject("http://localhost:8773/dbUser/"+uid,DbUser.class);
+        DbUser dbUser = restTemplate.getForObject("http://userService/dbUser/"+uid,DbUser.class);
         List<DbBook> books = new ArrayList<>();
         bidList.forEach(bid -> {
-            DbBook book = restTemplate.getForObject("http://localhost:8771/dbBook/" + bid, DbBook.class);
+            DbBook book = restTemplate.getForObject("http://bookService/dbBook/" + bid, DbBook.class);
             books.add(book);
         });
         return new borrowDetail(dbUser,books);

@@ -2,8 +2,14 @@ server:
   port: 8772
 
 spring:
+  application:
+    name: borrowService
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cloudstudy
     password: 123
     username: root
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7770/eureka

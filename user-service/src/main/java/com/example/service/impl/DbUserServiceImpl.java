@@ -29,6 +29,7 @@ public class DbUserServiceImpl implements DbUserService {
      */
     @Override
     public DbUser queryById(Integer uid) {
+        System.out.println("ok");
         return this.dbUserDao.queryById(uid);
     }
 
