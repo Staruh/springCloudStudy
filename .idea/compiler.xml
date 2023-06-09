@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user-service" />
+        <module name="gateWay-server" />
         <module name="book-service" />
         <module name="commons" />
         <module name="eureka" />
@@ -21,6 +22,7 @@
       <module name="borrow-service" options="-parameters" />
       <module name="commons" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="gateWay-server" options="-parameters" />
       <module name="springCloudStudy" options="" />
       <module name="user-service" options="-parameters" />
     </option>

@@ -17,9 +17,10 @@
     <modules>
         <module>user-service</module>
         <module>book-service</module>
-        <module>borror-service</module>
+        <module>borrow-service</module>
         <module>commons</module>
         <module>eureka</module>
+        <module>gateWay-server</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

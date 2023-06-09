@@ -3,6 +3,7 @@ server:
 eureka:
   instance:
     hostname: eureka02
+    prefer-ip-address: false
   client:
     fetch-registry: false
     service-url:
