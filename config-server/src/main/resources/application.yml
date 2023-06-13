@@ -1,0 +1,14 @@
+server:
+  port: 5770
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Staruh/SpringCloudConfig.git
+  application:
+    name: configServer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7770/eureka,http://eureka01:7771/eureka

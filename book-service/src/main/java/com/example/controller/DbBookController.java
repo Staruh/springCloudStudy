@@ -23,7 +23,6 @@ public class DbBookController {
      */
     @Resource
     private DbBookService dbBookService;
-
     /**
      * 分页查询
      *
@@ -44,6 +43,7 @@ public class DbBookController {
      */
     @GetMapping("{id}")
     public ResponseEntity<DbBook> queryById(@PathVariable("id") Integer id) {
+
         return ResponseEntity.ok(this.dbBookService.queryById(id));
     }
 
